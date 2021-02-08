@@ -1,0 +1,102 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="type === 'Create' ? 'Create user' : 'Edit user'"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzOkLoading]="isOkLoading"
+  [nzClosable]="false"
+>
+  <div *nzModalContent>
+    <form nz-form [nzLayout]="'inline'" [formGroup]="formData">
+      <nz-form-item *ngIf="type === 'Create'">
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="account_number">Account Number</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is invalid!">
+          <nz-input-group>
+            <input formControlName="account_number" nz-input type="number" pattern="^[0-9]*$" placeholder="Account Number"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="balance">Balance</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is invalid!">
+          <nz-input-group>
+            <input formControlName="balance" type="number" nz-input pattern="^[0-9]*$" placeholder="Balance"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="firstName">First name</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is reuqired!">
+          <nz-input-group>
+            <input formControlName="firstname" nz-input placeholder="First name"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="lastName">Last name</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is reuqired!">
+          <nz-input-group>
+            <input formControlName="lastname" nz-input placeholder="Last name"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="age">Age</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is reuqired!">
+          <nz-input-group>
+            <input formControlName="age" type="number" nz-input pattern="^[0-9]*$" placeholder="Age"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="gender">Gender</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is reuqired!">
+          <nz-radio-group formControlName="gender">
+            <label nz-radio nzValue="M">Male</label>
+            <label nz-radio nzValue="F">Female</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="address">Address</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is reuqired!">
+          <nz-input-group>
+            <input formControlName="address" nz-input placeholder="Address"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="employer">Employer</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is reuqired!">
+          <nz-input-group>
+            <input formControlName="employer" nz-input placeholder="Employer"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item *ngIf="type === 'Create'">
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Email invalid!">
+          <nz-input-group>
+            <input formControlName="email" nz-input placeholder="Email"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="city">City</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is reuqired!">
+          <nz-input-group>
+            <input formControlName="city" nz-input placeholder="City"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="12" [nzXs]="24" nzRequired nzFor="state">State</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="Field is reuqired!">
+          <nz-input-group>
+            <input formControlName="state" nz-input placeholder="State"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</nz-modal>

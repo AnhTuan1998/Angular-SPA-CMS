@@ -1,0 +1,27 @@
+.btn__create {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ant-form-item{
+  margin: 10px 0px 10px 0px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.form__action{
+  align-items: center;
+  .search__form{
+    nz-radio-group {
+      margin-left: 10px;
+    }
+  }
+  .form__action-sort{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+nz-select {
+  width: 12rem !important;
+}

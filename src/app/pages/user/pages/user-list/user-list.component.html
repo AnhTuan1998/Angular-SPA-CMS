@@ -1,0 +1,78 @@
+<div class="flex my-4 justify-start">
+  <button nz-button nzType="primary" class="btn__create" (click)="showModal()">
+    <i nz-icon nzTheme="outline" nzType="plus-circle"></i>
+    Add new user
+  </button>
+</div>
+<div class="form__action flex my-4 justify-between">
+  <form class="search__form" nz-form [nzLayout]="'inline'" [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <div nz-row>
+      <div nz-col>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Field invalid!">
+            <nz-select formControlName="field" nzPlaceHolder="Select option search">
+              <nz-option *ngFor="let item of selectOptions" nzValue="{{ item.key }}"
+                         nzLabel="{{ item.label }}"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col>
+        <nz-form-item *ngIf="searchForm.value.field !== 'gender'; else isGender">
+          <nz-form-control nzErrorTip="Field is requried!">
+            <nz-input-group>
+              <input formControlName="value" nz-input
+                     *ngIf="searchForm.value.field === ('account_number' || 'balance' || 'age'); else inputText"
+                     type="number" placeholder="Search value"/>
+              <ng-template #inputText>
+                <input formControlName="value" nz-input type="text" placeholder="Search value"/>
+              </ng-template>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <ng-template #isGender>
+          <nz-form-item>
+            <nz-form-control>
+              <nz-radio-group nz-row formControlName="value">
+                <label nz-radio nzValue="M">Male</label>
+                <label nz-radio nzValue="F">Female</label>
+              </nz-radio-group>
+            </nz-form-control>
+          </nz-form-item>
+        </ng-template>
+      </div>
+      <div nz-col>
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="primary">Search</button>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>
+  <div class="flex justify-between form__action-sort" nz-row>
+    <h4 style="margin-right: 10px;">Sort by:</h4>
+    <div nz-col>
+      <nz-select [(ngModel)]="typeSort" (ngModelChange)="onSort()" nzPlaceHolder="Sort by">
+        <nz-option *ngFor="let item of selectOptions" nzValue="{{ item.key }}"
+                   nzLabel="{{ item.label }}"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</div>
+<app-table
+  [users]="users"
+  [columns]="columns"
+  (Edit)="edit($event)"
+  (Delete)="delete($event)"
+></app-table>
+<app-modal
+  [isVisible]="isVisible"
+  [isOkLoading]="isOkLoading"
+  [type]="type"
+  [formData]="createUserForm"
+  (Cancel)="handleCancel($event)"
+  (Submit)="handleOk($event)"
+>
+</app-modal>
