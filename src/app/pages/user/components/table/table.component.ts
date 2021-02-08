@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {UserInterface} from "@authentication-based/core/interfaces";
-import {} from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-table',
@@ -13,7 +13,7 @@ export class TableComponent implements OnInit {
   @Output() Edit = new EventEmitter<Object>();
   @Output() Delete = new EventEmitter<Object>();
 
-  constructor() {
+  constructor(private modal: NzModalService) {
   }
 
   ngOnInit(): void {
@@ -23,8 +23,16 @@ export class TableComponent implements OnInit {
     this.Edit.emit(value)
   }
 
-  delete(value: any) {
-    this.Delete.emit(value)
+  showDeleteConfirm(value: any): void {
+    this.modal.confirm({
+      nzTitle: 'Are you sure delete user',
+      nzContent: '<b style="color: red;">' + value + '</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.Delete.emit(value),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
   }
-
 }
